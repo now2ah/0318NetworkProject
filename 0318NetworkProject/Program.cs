@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace _0318NetworkProject
 {
@@ -22,7 +23,7 @@ namespace _0318NetworkProject
     {
         static void Main(string[] args)
         {
-            MessageServerProcess();
+            FileServerProcess();
         }
 
         static void MessageServerProcess()
@@ -71,7 +72,29 @@ namespace _0318NetworkProject
 
             Socket clientSocket = listenSocket.Accept();
 
-            byte[] buffer = new byte[1024];
+            string path = "./image.webp";
+            byte[] imageBuffer = File.ReadAllBytes("./image.webp");
+            int index = 0;
+
+            FileStream fs = new FileStream(path, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+
+            bool isCompleted = false;
+            while (!isCompleted)
+            {
+                byte[] buffer = new byte[1024];
+                buffer = br.ReadBytes(1024);
+
+                int sendSize = clientSocket.Send(buffer);
+
+                if (sendSize < 1024)
+                    isCompleted = true;
+                else
+                    index += 1024;
+            }
+
+            clientSocket.Close();
+            listenSocket.Close();
         }
     }
 }

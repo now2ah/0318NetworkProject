@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace _0318NetworkClient
 {
@@ -22,7 +23,8 @@ namespace _0318NetworkClient
     {
         static void Main(string[] args)
         {
-            MessageClientProcess();
+            //MessageClientProcess();
+            FileClientProcess();
         }
 
         static void MessageClientProcess()
@@ -55,7 +57,36 @@ namespace _0318NetworkClient
 
         static void FileClientProcess()
         {
+            Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 4000);
+
+            serverSocket.Connect(endPoint);
+
+            string path = "./image.webp";
+            FileStream fs = new FileStream(path, FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
+
+            //byte[] imageBytes = new byte[100000];
+
+            bool isCompleted = false;
+            while(!isCompleted)
+            {
+                byte[] receiveBuffer = new byte[1024];
+                int receiveSize = serverSocket.Receive(receiveBuffer);
+
+                if (receiveSize != 1024)
+                {
+                    bw.Write(receiveBuffer);
+                    isCompleted = true;
+                }
+                else
+                {
+                    bw.Write(receiveBuffer);
+                }
+            }
+
+            serverSocket.Close();
         }
     }
 }
