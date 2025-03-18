@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4DC6B142-4967-41F1-9F08-B5C69922D656}</ProjectGuid>
+    <ProjectGuid>{E6E86C1F-2E62-4B5E-B484-27D7872672A1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_0318NetworkProject</RootNamespace>
-    <AssemblyName>0318NetworkProject</AssemblyName>
+    <RootNamespace>_0318NetworkClient</RootNamespace>
+    <AssemblyName>0318NetworkClient</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
