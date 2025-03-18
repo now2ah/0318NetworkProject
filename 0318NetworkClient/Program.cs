@@ -86,6 +86,9 @@ namespace _0318NetworkClient
                 }
             }
 
+            bw.Close();
+            fs.Close();
+
             serverSocket.Close();
         }
     }

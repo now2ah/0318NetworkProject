@@ -23,6 +23,7 @@ namespace _0318NetworkProject
     {
         static void Main(string[] args)
         {
+            //MessageServerProcess();
             FileServerProcess();
         }
 
@@ -92,6 +93,9 @@ namespace _0318NetworkProject
                 else
                     index += 1024;
             }
+
+            br.Close();
+            fs.Close();
 
             clientSocket.Close();
             listenSocket.Close();
